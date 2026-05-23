@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Finance Planner - Vanilla DOM Project</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <article class="app-shell">
+        <header class="hero">
+            <section aria-labelledby="appTitle">
+                <p class="eyebrow">Personal budget tracker</p>
+                <h1 id="appTitle">Smart Finance Planner</h1>
+                <p>Plan your monthly budget, record expenses, and see your remaining balance update instantly.</p>
+            </section>
+            <aside class="hero-total" aria-label="Available balance">
+                <span>Available balance</span>
+                <strong id="heroBalance">৳0</strong>
+            </aside>
+        </header>
+
+        <aside id="appMessage" class="app-message" role="status" aria-live="polite"></aside>
+
+        <main class="dashboard-grid">
+            <section class="panel budget-panel" aria-labelledby="budgetTitle">
+                <header class="panel-heading">
+                    <section>
+                        <span class="section-kicker">Monthly setup</span>
+                        <h2 id="budgetTitle">Set Budget</h2>
+                    </section>
+                </header>
+
+                <form class="input-row" id="budgetForm">
+                    <label class="sr-only" for="budgetInput">Monthly budget amount</label>
+                    <input type="number" id="budgetInput" placeholder="Enter amount, e.g. 50000" min="1">
+                    <button id="setBudgetBtn" type="submit">Set Budget</button>
+                </form>
+                <p class="helper-text">Use your expected spending limit for this month.</p>
+            </section>
+
+            <section class="panel overview-panel" aria-labelledby="overviewTitle">
+                <header class="panel-heading">
+                    <section>
+                        <span class="section-kicker">Current month</span>
+                        <h2 id="overviewTitle">Financial Overview</h2>
+                    </section>
+                </header>
+
+                <section class="stats" aria-label="Financial totals">
+                    <article class="stat-card">
+                        <span>Budget</span>
+                        <strong id="viewBudget">৳0</strong>
+                    </article>
+                    <article class="stat-card">
+                        <span>Expense</span>
+                        <strong id="viewExpense" class="text-danger">৳0</strong>
+                    </article>
+                    <article class="stat-card">
+                        <span>Balance</span>
+                        <strong id="viewBalance" class="text-success">৳0</strong>
+                    </article>
+                </section>
+
+                <p class="progress-meta">
+                    <span>Budget used</span>
+                    <span id="progressLabel">0%</span>
+                </p>
+                <div class="progress-bar-container" aria-label="Budget usage">
+                    <div id="trackerProgress" class="progress-bar"></div>
+                </div>
+                <p id="budgetStatus" class="helper-text">Set a budget to start tracking progress.</p>
+            </section>
+
+            <section class="panel form-panel" aria-labelledby="expenseFormTitle">
+                <header class="panel-heading">
+                    <section>
+                        <span class="section-kicker">Expense entry</span>
+                        <h2 id="expenseFormTitle">Add New Expense</h2>
+                    </section>
+                </header>
+
+                <form id="expenseForm">
+                    <div class="form-group">
+                        <label for="expTitle">Expense Name</label>
+                        <input type="text" id="expTitle" placeholder="e.g. Internet Bill" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expAmount">Amount</label>
+                        <input type="number" id="expAmount" placeholder="e.g. 1500" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expCategory">Category</label>
+                        <select id="expCategory">
+                            <option value="Food">Food</option>
+                            <option value="Rent">Rent</option>
+                            <option value="Bills">Bills</option>
+                            <option value="Entertainment">Entertainment</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-block">Add Expense</button>
+                </form>
+            </section>
+
+            <section class="panel category-panel" aria-labelledby="categoryTitle">
+                <header class="panel-heading">
+                    <section>
+                        <span class="section-kicker">Custom groups</span>
+                        <h2 id="categoryTitle">Categories</h2>
+                    </section>
+                    <span id="categoryCount" class="count-pill">0 categories</span>
+                </header>
+
+                <form id="categoryForm" class="category-form">
+                    <label class="sr-only" for="categoryInput">New category name</label>
+                    <input type="text" id="categoryInput" placeholder="Create category, e.g. Transport" required>
+                    <button type="submit">Add</button>
+                </form>
+
+                <ul id="categoryList" class="category-list"></ul>
+                <p class="helper-text">Categories already used by expenses are protected until those expenses are deleted.</p>
+            </section>
+
+            <section class="panel history-panel" aria-labelledby="historyTitle">
+                <header class="panel-heading">
+                    <section>
+                        <span class="section-kicker">Recent activity</span>
+                        <h2 id="historyTitle">Expense History</h2>
+                    </section>
+                    <span id="expenseCount" class="count-pill">0 items</span>
+                </header>
+                <nav class="history-actions" aria-label="Expense history actions">
+                    <button id="clearExpensesBtn" class="secondary-btn" type="button">Clear Expenses</button>
+                    <button id="resetAppBtn" class="danger-btn" type="button">Reset All</button>
+                </nav>
+                <p id="emptyState" class="empty-state">No expenses added yet. Add your first expense to start tracking spending.</p>
+                <ul id="expenseList" class="expense-list">
+                </ul>
+            </section>
+        </main>
+    </article>
+
+    <script src="app.js"></script>
+</body>
+</html>
